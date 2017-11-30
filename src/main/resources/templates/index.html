@@ -6,10 +6,16 @@
 </head>
 <body>
 <div style="float: right" th:fragment="logout" sec:authorize="isAuthenticated()">
-	<div style="float:left">
+	<div>
 		<span style="font-weight:bold">User: </span><span sec:authentication="name"></span>
 	</div>
-	<div style="float:none">&nbsp;</div>
+	<div>
+		<span style="font-weight:bold">Default Authorities: </span><span sec:authentication="principal.authorities"></span>
+	</div>
+	<div>
+		<span style="font-weight:bold">Mapped Authorities: </span><span sec:authentication="authorities"></span>
+	</div>
+	<div>&nbsp;</div>
 	<div style="float:right">
 		<form action="#" th:action="@{/logout}" method="post">
 			<input type="submit" value="Logout" />
@@ -22,8 +28,13 @@
 	via the OAuth 2.0 Client <span style="font-weight:bold" th:text="${clientName}"></span>
 </div>
 <div>&nbsp;</div>
+<div>&nbsp;</div>
 <div>
-	<a href="/userinfo" th:href="@{/userinfo}">Display User Info</a>
+	<a href="/create-message" th:href="@{/create-message}">Create Message</a> |
+	<a href="/read-message" th:href="@{/read-message}">Read Message</a> |
+	<a href="/update-message" th:href="@{/update-message}">Update Message</a> |
+	<a href="/delete-message" th:href="@{/delete-message}">Delete Message</a> |
+	<a href="/manage-message" th:href="@{/manage-message}">Manage Message</a>
 </div>
 </body>
 </html>

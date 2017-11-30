@@ -15,6 +15,17 @@ spring:
     oauth2:
       client:
         registration:
-          google:
+          okta:
             client-id: your-app-client-id
             client-secret: your-app-client-secret
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid, profile, email, address, phone
+            client-name: Okta
+        provider:
+          okta:
+            authorization-uri: https://dev-829719.oktapreview.com/oauth2/v1/authorize
+            token-uri: https://dev-829719.oktapreview.com/oauth2/v1/token
+            user-info-uri: https://dev-829719.oktapreview.com/oauth2/v1/userinfo
+            jwk-set-uri: https://dev-829719.oktapreview.com/oauth2/v1/keys

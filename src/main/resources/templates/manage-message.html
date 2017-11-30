@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<title>Spring Security - OAuth 2.0 Login</title>
+	<meta charset="utf-8" />
+</head>
+<body>
+<div th:substituteby="index::logout"></div>
+<h1>OAuth 2.0 Login with Spring Security</h1>
+<div>&nbsp;</div>
+<div>
+	<span style="font-weight:bold;color:red">MANAGE</span> Message...
+</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>
+	<a href="/create-message" th:href="@{/create-message}">Create Message</a> |
+	<a href="/read-message" th:href="@{/read-message}">Read Message</a> |
+	<a href="/update-message" th:href="@{/update-message}">Update Message</a> |
+	<a href="/delete-message" th:href="@{/delete-message}">Delete Message</a> |
+	<a href="/manage-message" th:href="@{/manage-message}">Manage Message</a>
+</div>
+</body>
+</html>
