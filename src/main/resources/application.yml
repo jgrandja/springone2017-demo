@@ -18,3 +18,6 @@ spring:
           google:
             client-id: your-app-client-id
             client-secret: your-app-client-secret
+          github:
+            client-id: your-app-client-id
+            client-secret: your-app-client-secret
