@@ -11,13 +11,3 @@ logging:
 spring:
   thymeleaf:
     cache: false
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: your-app-client-id
-            client-secret: your-app-client-secret
-          github:
-            client-id: your-app-client-id
-            client-secret: your-app-client-secret
