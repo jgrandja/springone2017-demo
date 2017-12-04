@@ -8,6 +8,13 @@ oauth:
       - uaa.user
       - approvals.me
       - oauth.approvals
+  clients:
+    oauth2login-demo:
+      secret: secret
+      authorized-grant-types: authorization_code
+      scope: openid,profile,email
+      authorities: uaa.resource
+      redirect-uri: http://localhost:8080/login/oauth2/code/uaa
 
 scim:
   users:
