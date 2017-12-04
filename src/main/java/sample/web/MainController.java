@@ -15,11 +15,8 @@
  */
 package sample.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -28,6 +25,7 @@ import org.springframework.web.reactive.function.client.ClientRequest;
 import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import sample.annotation.AuthorizedClient;
 
 import java.util.Collections;
 import java.util.Map;
@@ -38,26 +36,15 @@ import java.util.Map;
 @Controller
 public class MainController {
 
-	@Autowired
-	private OAuth2AuthorizedClientService authorizedClientService;
-
 	@GetMapping("/")
-	public String index(Model model, OAuth2AuthenticationToken authentication) {
-		OAuth2AuthorizedClient authorizedClient =
-				this.authorizedClientService.loadAuthorizedClient(
-						authentication.getAuthorizedClientRegistrationId(),
-						authentication.getName());
-		model.addAttribute("userName", authentication.getName());
+	public String index(@AuthorizedClient("okta") OAuth2AuthorizedClient authorizedClient, Model model) {
+		model.addAttribute("userName", authorizedClient.getPrincipalName());
 		model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
 		return "index";
 	}
 
 	@GetMapping("/userinfo")
-	public String userinfo(Model model, OAuth2AuthenticationToken authentication) {
-		OAuth2AuthorizedClient authorizedClient =
-				this.authorizedClientService.loadAuthorizedClient(
-						authentication.getAuthorizedClientRegistrationId(),
-						authentication.getName());
+	public String userinfo(@AuthorizedClient("okta") OAuth2AuthorizedClient authorizedClient, Model model) {
 		Map userAttributes = Collections.emptyMap();
 		String userInfoEndpointUri = authorizedClient.getClientRegistration()
 			.getProviderDetails().getUserInfoEndpoint().getUri();
